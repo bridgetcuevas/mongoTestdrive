@@ -11,7 +11,5 @@ describe('creating records', () => {
        assert(!helen.isNew);
        done();
      });
-
   });
-
 });
