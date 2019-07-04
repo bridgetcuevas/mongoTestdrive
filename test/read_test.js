@@ -15,7 +15,7 @@ describe('Reading users out of the database', () => {
     .then((users)=> {
       console.log(users[0]._id);
       console.log(helen._id);
-      assert(users._id.toString() === helen._id.toString());
+      assert(users[0]._id.toString() === helen._id.toString());
       done();
     })
   });
