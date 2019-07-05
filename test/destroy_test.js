@@ -3,7 +3,7 @@
 
  describe('Deleting a user', () => {
    let helen;
-
+   
    beforeEach((done) => {
      helen = new User({ name: 'Helen'});
      helen.save()
