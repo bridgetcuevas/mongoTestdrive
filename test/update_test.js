@@ -5,7 +5,7 @@ describe('Updating records', ()=> {
   let helen;
 
   beforeEach((done)=> {
-    helen = new User({name: 'Helen'})
+    helen = new User({name: 'Helen', postCount: 0})
     helen.save()
      .then(()=> done());
   });
@@ -14,7 +14,6 @@ describe('Updating records', ()=> {
     operation
     .then(() => User.find({}))
     .then((users) => {
-      console.log(users);
       assert(users.length === 1);
       assert(users[0].name === 'Margot');
       done();
@@ -22,7 +21,9 @@ describe('Updating records', ()=> {
   }
 
   it('should execute the model instance of updateOne', (done) => {
-    assertName(helen.updateOne({ name: 'Margot'}), done);
+    assertName(helen.updateOne({ name: 'Margot'}), 
+    done
+    );
   });
 
   it('should execute the class method of updateMany', (done) => {
@@ -45,5 +46,14 @@ describe('Updating records', ()=> {
       done
       );
   });
-  
+
+  it('should increment a users postCount by 1', (done) => {
+    User.updateOne({name:'Helen'}, { $inc: { postCount: 1 } })
+    .then(()=> User.findOne({ name: 'Helen'}))
+    .then((user) => {
+      assert(user.postCount === 1);
+      done();
+    });
+  }); 
+
 });
