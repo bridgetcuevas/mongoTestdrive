@@ -13,8 +13,6 @@ describe('Reading users out of the database', () => {
   it('should find all users with the name helen', (done) => {
     User.find({name: 'Helen'})
     .then((users)=> {
-      console.log(users[0]._id);
-      console.log(helen._id);
       assert(users[0]._id.toString() === helen._id.toString());
       done();
     })
