@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const PostSchema = require('./post_schema');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema( {
@@ -10,7 +11,9 @@ const UserSchema = new Schema( {
     },
     required: [true, 'Name is required.']
   },
-  postCount: Number
+  postCount: Number,
+  //list of sub documents
+  posts: [PostSchema]
 });
 
 const User = mongoose.model('user', UserSchema);
