@@ -47,7 +47,7 @@ describe('Updating records', ()=> {
       );
   });
 
-  it('should increment a users postCount by 1', (done) => {
+  xit('should increment a users postCount by 1', (done) => {
     User.updateOne({name:'Helen'}, { $inc: { postCount: 1 } })
     .then(()=> User.findOne({ name: 'Helen'}))
     .then((user) => {
