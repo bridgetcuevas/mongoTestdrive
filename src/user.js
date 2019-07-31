@@ -27,7 +27,7 @@ UserSchema.pre('remove', function(next) {
    const BlogPost = mongoose.model('blogPost');
    //this === helen
 
-   BlogPost.deleteOne({_id: {$in: this.blogPosts}})
+   BlogPost.remove({_id: {$in: this.blogPosts}})
    .then(() => next());
  })
 
