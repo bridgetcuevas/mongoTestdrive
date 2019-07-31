@@ -26,9 +26,29 @@ describe('Associations', () => {
     .then((user) => {
       assert(user.blogPosts[0].title === 'JS is Great'); 
       done();
-
     });
-
   });
 
+  it('should save a full relation tree', (done)=> {
+    User.findOne({name:'Helen'})
+    .populate({
+      path: 'blogPosts',
+      populate:{
+        path:'comments',
+        model: 'comment',
+        populate: {
+          path: 'user',
+          model: 'user'
+        }
+      }
+    })
+    .then((user)=> {
+      assert(user.name === 'Helen');
+      assert(user.blogPosts[0].title === 'JS is Great');
+      assert(user.blogPosts[0].comments[0].content === 'Congrats on great post');
+      assert(user.blogPosts[0].comments[0].user.name === 'Helen');
+      done();
+    })
+  })  
 });
+ 
